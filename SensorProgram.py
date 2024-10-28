@@ -42,8 +42,7 @@ try:
                     # Load ONNX model into session. Currently loading decision tree model.
                     # If you want to load a different model type, replace 'dtree.onnx' with the appropriate
                     # ONNX file name.
-                    # This code was based on the ONNX documentation:
-                    # https://onnx.ai/sklearn-onnx/index.html
+                    # This code was based on the ONNX documentation (ONNX, n.d.)
                     sess = rt.InferenceSession(path+"dtree.onnx", providers=["CPUExecutionProvider"])
                     input_name = sess.get_inputs()[0].name
                     label_name = sess.get_outputs()[0].name
@@ -63,7 +62,7 @@ try:
                     # Only presses the key if 2 seconds have passed since the last activation.
                     # This aims to prevent the key being pressed multiple times per muscle
                     # activation.
-                    # Code based on response provided by user "Standard": https://stackoverflow.com/questions/58098177/execute-a-method-only-when-two-seconds-have-elapsed-from-last-execution-time
+                    # Code based on response provided by user "Standard" (2019).
                     if((currentTime-previousTime)>=2 and str(r)=="[1]"):
                         Controller.press(Key.space)
                         Controller.release(Key.space)
@@ -83,3 +82,14 @@ except KeyboardInterrupt:
 finally:
     if ser.is_open:
         ser.close()
+
+'''
+Bibliography:
+
+ONNX, n.d., "sklearn-onnx: Convert your scikit-learn model into ONNX", 
+sklearn-onnx, viewed 28 October 2024, https://onnx.ai/sklearn-onnx/index.html
+
+'Standard', 2019, "Execute a method only when two seconds have elapsed from last execution time", 
+StackOverflow, viewed 28 October 2024, https://stackoverflow.com/questions/58098177/execute-a-method-only-when-two-seconds-have-elapsed-from-last-execution-time
+
+'''
